@@ -19,7 +19,7 @@ function access($server)
         echo json_encode(array('success' => true, 'message' => 'You accessed my APIs!'));
     }
 
-function main($parameter)
+function oauth2($parameter)
     {
         // connection for SQLite
         $pdo = new PDO('sqlite:/var/lib/uniclient/oauth2-database');
