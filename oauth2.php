@@ -5,7 +5,7 @@ require "../vendor/autoload.php";
 function token($server)
     {
         // Handle a request for an OAuth2.0 Access Token and send the response to the client
-        $server->handleTokenRequest(OAuth2\Request::createFromGlobals())->send();
+        return $server->handleTokenRequest(OAuth2\Request::createFromGlobals())->send();
     }
 
 function access($server)
@@ -16,7 +16,7 @@ function access($server)
             $server->getResponse()->send();
             die;
         }
-        echo json_encode(array('success' => true, 'message' => 'You accessed my APIs!'));
+        return json_encode(array('success' => true, 'message' => 'You accessed my APIs!'));
     }
 
 function oauth2($parameter)
@@ -39,8 +39,8 @@ function oauth2($parameter)
         $server->addGrantType(new OAuth2\GrantType\AuthorizationCode($storage));
 
         if($parameter=='access')
-            access($server);
+            return access($server);
         else
-            token($server);
+            return token($server);
     }
     ?>
