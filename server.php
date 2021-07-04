@@ -1,6 +1,10 @@
 <?php
 
+include "cors.php";
+
 require "../vendor/autoload.php";
+
+CORS();
 
 // connection for SQLite
 $pdo = new PDO('sqlite:/var/lib/libauth.js/oauth2-database');
