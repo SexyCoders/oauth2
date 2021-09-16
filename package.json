@@ -1,0 +1,23 @@
+{
+  "name": "@sexycoders/oauth2",
+  "version": "1.0.0",
+  "description": "SexyCoders OAuth2 implementation.",
+  "main": "oauth2.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/sexycoders/oauth2.git"
+  },
+  "keywords": [
+    "oauth2",
+    "authentication"
+  ],
+  "author": "Shane",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://gitlab.com/sexycoders/oauth2/issues"
+  },
+  "homepage": "https://gitlab.com/sexycoders/oauth2#readme"
+}
