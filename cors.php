@@ -20,7 +20,7 @@ function CORS()
             // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
             // you want to allow, and if so:
             $trusted=array(
-                'http://test.uniclient.localhost:8088'
+                'https://uniclient.sexycoders.org'
                 ); 
             if(!in_array($_SERVER['HTTP_ORIGIN'],$trusted))
                 return 1;
