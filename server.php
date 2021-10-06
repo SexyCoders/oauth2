@@ -10,7 +10,8 @@ CORS();
 //$pdo = new PDO('sqlite:/var/lib/libauth.js/oauth2-database');
 //
 // connection for MySQL
-$pdo = new PDO('mysql:host=localhost;dbname=OAUTH2',"uniclient","password");
+$password=file_get_contents("/home/sotiris/oauth_pass");
+$pdo = new PDO('mysql:host=localhost;dbname=OAUTH2',"uniclient",$password);
 
 // error reporting
 ini_set('display_errors',1);error_reporting(E_ALL);
