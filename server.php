@@ -7,7 +7,10 @@ require "../vendor/autoload.php";
 CORS();
 
 // connection for SQLite
-$pdo = new PDO('sqlite:/var/lib/libauth.js/oauth2-database');
+//$pdo = new PDO('sqlite:/var/lib/libauth.js/oauth2-database');
+//
+// connection for MySQL
+$pdo = new PDO('mysql:host=localhost;dbname=OAUTH2',"uniclient","password");
 
 // error reporting
 ini_set('display_errors',1);error_reporting(E_ALL);
