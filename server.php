@@ -10,8 +10,12 @@ CORS();
 //$pdo = new PDO('sqlite:/var/lib/libauth.js/oauth2-database');
 //
 // connection for MySQL
-$password=file_get_contents("/etc/libauth.js/oauth_pass");
-$pdo = new PDO('mysql:host=10.0.0.33;dbname=oauth2',"libauth",$password);
+$username='libauth';
+$filename='/etc/libauth.js/oauth_pass';
+$handle = fopen($filename, "r");
+$passwd = fscanf($handle,"%s");
+fclose($handle);
+$pdo = new PDO('mysql:host=10.0.0.33;dbname=oauth2',$username,$passwd[0]);
 
 // error reporting
 ini_set('display_errors',1);error_reporting(E_ALL);
