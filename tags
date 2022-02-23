@@ -50,4 +50,4 @@ url	package.json	/^    "url": "https:\/\/gitlab.com\/sexycoders\/oauth2\/issues"
 username	.server.php	/^$username='libauth';$/;"	v
 username	index.php	/^$username='libauth';$/;"	v
 validate	index.php	/^    $validate = new Tokens($this->oauth);$/;"	v
-version	package.json	/^  "version": "1.1.0",$/;"	s
+version	package.json	/^  "version": "1.2.0",$/;"	s
