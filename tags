@@ -10,13 +10,21 @@
 0	package.json	/^    "oauth2",$/;"	s	array:keywords
 1	package.json	/^    "authentication"$/;"	s	array:keywords
 CORS	cors.php	/^function CORS()$/;"	f
+Request	public/index.php	/^use \\Psr\\Http\\Message\\ServerRequestInterface as Request;$/;"	a	typeref:unknown:\\Psr\\Http\\Message\\ServerRequestInterface
+Response	public/index.php	/^use \\Psr\\Http\\Message\\ResponseInterface as Response;$/;"	a	typeref:unknown:\\Psr\\Http\\Message\\ResponseInterface
 \x20https	oauth2.conf	/^RewriteRule ^ https:\/\/%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]$/;"	k
+app	public/index.php	/^$app = new Slim\\App(["settings" => $config]);$/;"	v
 author	package.json	/^  "author": "Shane",$/;"	s
 bshaffer/oauth2-server-php	composer.json	/^        "bshaffer\/oauth2-server-php": "^1.11"$/;"	s	object:require
 bugs	package.json	/^  "bugs": {$/;"	o
 constructor	oauth2.js	/^    constructor()$/;"	m	class:oauth2
+container	public/index.php	/^$container = $app->getContainer();$/;"	v
+db	public/index.php	/^    $db = $c['settings']['odb'];$/;"	v
 description	package.json	/^  "description": "SexyCoders OAuth2 implementation.",$/;"	s
+eko3alpha/slim-cors-middleware	composer.json	/^        "eko3alpha\/slim-cors-middleware": "^1.1",$/;"	s	object:require
+filename	public/index.php	/^$filename='\/etc\/libauth.js\/oauth_pass';$/;"	v
 filename	server.php	/^$filename='\/etc\/libauth.js\/oauth_pass';$/;"	v
+handle	public/index.php	/^$handle = fopen($filename, "r");$/;"	v
 handle	server.php	/^$handle = fopen($filename, "r");$/;"	v
 homepage	package.json	/^  "homepage": "https:\/\/gitlab.com\/sexycoders\/oauth2#readme"$/;"	s
 keywords	package.json	/^  "keywords": [$/;"	a
@@ -24,17 +32,22 @@ license	package.json	/^  "license": "GPL-3.0-or-later",$/;"	s
 main	package.json	/^  "main": "oauth2.js",$/;"	s
 name	package.json	/^  "name": "@sexycoders\/oauth2",$/;"	s
 oauth2	oauth2.js	/^export class oauth2$/;"	c
+passwd	public/index.php	/^$passwd = fscanf($handle,"%s");$/;"	v
 passwd	server.php	/^$passwd = fscanf($handle,"%s");$/;"	v
 pdo	server.php	/^$pdo = new PDO('mysql:host=10.0.0.33;dbname=oauth2',$username,$passwd[0]);$/;"	v
 repository	package.json	/^  "repository": {$/;"	o
 require	composer.json	/^    "require": {$/;"	o
 scripts	package.json	/^  "scripts": {$/;"	o
+server	public/index.php	/^    $server = new OAuth2\\Server($this->oauth);$/;"	v
 server	server.php	/^$server = new OAuth2\\Server($storage);$/;"	v
+slim/slim	composer.json	/^        "slim\/slim": "3.*",$/;"	s	object:require
+storage	public/index.php	/^    $storage = new OAuth2\\Storage\\Pdo(array('dsn' => "mysql:dbname=".$db['dbname'].";host=".$d/;"	v
 storage	server.php	/^$storage = new OAuth2\\Storage\\Pdo($pdo);$/;"	v
 test	package.json	/^    "test": "echo \\"Error: no test specified\\" && exit 1"$/;"	s	object:scripts
 type	package.json	/^    "type": "git",$/;"	s	object:repository
 url	package.json	/^    "url": "git+https:\/\/gitlab.com\/sexycoders\/oauth2.git"$/;"	s	object:repository
 url	package.json	/^    "url": "https:\/\/gitlab.com\/sexycoders\/oauth2\/issues"$/;"	s	object:bugs
-userid	token.php	/^$userid = "test"; \/\/ A value on your server that identifies the user$/;"	v
+username	public/index.php	/^$username='libauth';$/;"	v
 username	server.php	/^$username='libauth';$/;"	v
+validate	public/index.php	/^    $validate = new Tokens($this->oauth);$/;"	v
 version	package.json	/^  "version": "1.1.0",$/;"	s
