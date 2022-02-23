@@ -4,7 +4,7 @@ export class oauth2
       {
         this.token=null;
         this.location="https://oauth2.sexycoders.org";
-        this.get_token=this.location+"/token.php";
-        this.validate=this.location+"/validate.php";
+        this.get_token=this.location+"/token;
+        this.validate=this.location+"/validate";
       }
   }
