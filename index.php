@@ -25,6 +25,11 @@ $config['odb']['pass'] = $passwd[0];
 $config['odb']['dbname'] = "oauth2";
 
 $app = new Slim\App(["settings" => $config]);
+$app->add(new \Eko3alpha\Slim\Middleware\CorsMiddleware([
+    'https://oauth2.sexycoders.org' => ['POST'],
+    'https://data.sexycoders.org' => ['POST'],
+    'https://uniclient.sexycoders.org' => ['POST'],
+  ]));
 
 $container = $app->getContainer();
 
