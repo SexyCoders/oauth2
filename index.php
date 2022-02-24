@@ -62,7 +62,7 @@ $app->post('/token',function(Request $request, Response $response){
 
 });
 
-$app->get('/validate',function(Request $request, Response $response){
+$app->post('/validate',function(Request $request, Response $response){
 
     // @ Validate Oauth Token passed via http headers in "Authorization bearer"
     $validate = new Tokens($this->oauth);
