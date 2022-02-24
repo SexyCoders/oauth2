@@ -43,10 +43,6 @@ $container['oauth'] = function($c){
     return $storage;
 };
 
-$app->get('/', function ($request, $response) {
-    return 'Welcome to slim 3.9 framework tutorial on how to implement OAuth 2.0';
-});
-
 $app->post('/token',function(Request $request, Response $response){
 
     // @ generate a fresh token
