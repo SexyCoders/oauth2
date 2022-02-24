@@ -26,9 +26,9 @@ $config['odb']['dbname'] = "oauth2";
 
 $app = new Slim\App(["settings" => $config]);
 $app->add(new \Eko3alpha\Slim\Middleware\CorsMiddleware([
-    'https://oauth2.sexycoders.org' => ['POST'],
-    'https://data.sexycoders.org' => ['POST'],
-    'https://uniclient.sexycoders.org' => ['POST'],
+    'https://oauth2.sexycoders.org' => ['POST','GET'],
+    'https://data.sexycoders.org' => ['POST','GET'],
+    'https://uniclient.sexycoders.org' => ['POST','GET'],
   ]));
 
 $container = $app->getContainer();
@@ -62,7 +62,7 @@ $app->post('/token',function(Request $request, Response $response){
 
 });
 
-$app->post('/validate',function(Request $request, Response $response){
+$app->get('/validate',function(Request $request, Response $response){
 
     // @ Validate Oauth Token passed via http headers in "Authorization bearer"
     $validate = new Tokens($this->oauth);
