@@ -65,7 +65,7 @@ $app->post('/token',function(Request $request, Response $response){
     parse_str($j,$a); 
     $redis = new Redis();
     $redis->connect('10.0.0.250', 6379);
-    $redis->set("test",$t);
+    $redis->set("test",json_encode($t));
     //$redis->set($t->access_token,$a['client_id']);
     $server->handleTokenRequest($t)->send();
 
