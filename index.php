@@ -59,7 +59,7 @@ $app->post('/token',function(Request $request, Response $response){
     // @ generate a Oauth 2.0 token in json with format below
     // @ {"access_token":"ac7aeb0ee432bf9b73f78985c66a1ad878593530","expires_in":3600,"token_type":"Bearer","scope":null}
     $t=OAuth2\Request::createFromGlobals();
-    $pp=fopen("/tmp/tttttt","r");
+    $pp=fopen("/tmp/tttttt","w");
     fwrite($pp,$t);
     $server->handleTokenRequest($t)->send();
     
