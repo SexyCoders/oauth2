@@ -59,6 +59,7 @@ $app->post('/token',function(Request $request, Response $response){
     // @ generate a Oauth 2.0 token in json with format below
     // @ {"access_token":"ac7aeb0ee432bf9b73f78985c66a1ad878593530","expires_in":3600,"token_type":"Bearer","scope":null}
     $t=OAuth2\Request::createFromGlobals();
+    $t=$server->handleTokenRequest($t)
     //$g=json_decode($t);
     $j=$request->getBody();
     $a=[];
@@ -67,7 +68,7 @@ $app->post('/token',function(Request $request, Response $response){
     $redis->connect('10.0.0.250', 6379);
     $redis->set("test",json_encode($t));
     //$redis->set($t->access_token,$a['client_id']);
-    $server->handleTokenRequest($t)->send();
+    $t->send();
 
 });
 
