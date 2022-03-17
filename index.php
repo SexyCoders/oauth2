@@ -52,8 +52,8 @@ $app->post('/token',function(Request $request, Response $response){
     $ip="10.0.0.20";
     $url = "http://".$ip;
 
-    $log_redis->set("token_callback_ip",json_encode($ip));
-    $log_redis->set("token_callback_url",json_encode($url));
+    $log_redis->set("token_callback_ip",$ip);
+    $log_redis->set("token_callback_url",$url);
 
 
 
