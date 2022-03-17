@@ -29,7 +29,6 @@ $app->add(new \Eko3alpha\Slim\Middleware\CorsMiddleware([
     'https://oauth2.sexycoders.org' => ['POST','GET'],
     'https://data.sexycoders.org' => ['POST','GET'],
     'https://uniclient.sexycoders.org' => ['POST','GET'],
-    'https://10.0.0.20' => ['POST','GET'],
   ]));
 
 $container = $app->getContainer();
@@ -66,18 +65,18 @@ $app->post('/token',function(Request $request, Response $response){
     $forwarded_data= $request->getBody()->getContents();
     $log_redis->set("token_callback_forwarded_data",json_encode($forwarded_data));
 
-    //$headers = array(
-    //"Accept: application/json",
-    //"Content-Type: application/json",
-    //);
-    //$log_redis->set("token_callback_headers",json_encode($headers));
+    $headers = array(
+    "Accept: application/json",
+    "Content-Type: application/json",
+    );
+    $log_redis->set("token_callback_headers",json_encode($headers));
 
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    //curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($curl, CURLOPT_POSTFIELDS, $forwarded_data);
 
     $resp = curl_exec($curl);
