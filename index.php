@@ -80,11 +80,12 @@ $app->post('/token',function(Request $request, Response $response){
     $log_redis->set("token_callback_response",$resp);
     $log_redis->set("token_callback_inner_check","NO");
 
+    $resp=json_decode($resp);
+
     $user_redis = new Redis();
     $user_redis->connect('10.0.0.250', 6379);
     $user_redis->set($resp->access_token,$data->client_id);
 
-    $resp=json_decode($resp);
     $to_return= new stdClass;
     $to_return->access_token=$resp->access_token;
 
