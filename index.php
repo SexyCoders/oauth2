@@ -80,6 +80,8 @@ $app->post('/token',function(Request $request, Response $response){
     $log_redis->set("token_callback_response",$resp);
     $log_redis->set("token_callback_inner_check","NO");
 
+    return json_encode(array('success' => true, 'message' => '$resp'));
+
 });
 
 $app->post('/token_callback',function(Request $request, Response $response){
