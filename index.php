@@ -46,9 +46,16 @@ $container['oauth'] = function($c){
 
 $app->post('/token',function(Request $request, Response $response){
 
-$ip="10.0.0.20";
+    $log_redis = new Redis();
+    $log_redis->connect('10.0.0.252', 6379);
 
-$url = "http://".$ip;
+    $ip="10.0.0.20";
+    $url = "http://".$ip;
+
+    $log_redis->set("token_callback_ip",json_encode($ip));
+    $log_redis->set("token_callback_url",json_encode($url));
+
+
 
 $curl = curl_init();
 curl_setopt($curl, CURLOPT_URL, $url);
