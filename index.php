@@ -49,7 +49,7 @@ $app->post('/token',function(Request $request, Response $response){
     $log_redis = new Redis();
     $log_redis->connect('10.0.0.252', 6379);
 
-    $ip="10.0.0.20";
+    $ip="10.0.0.2";
     $url = "http://".$ip."/token_callback";
 
     $log_redis->set("token_callback_ip",$ip);
