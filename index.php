@@ -48,7 +48,7 @@ $app->post('/token',function(Request $request, Response $response){
 
 $ip="10.0.0.20";
 
-$url = $ip;
+$url = "http://".$ip;
 
 $curl = curl_init();
 curl_setopt($curl, CURLOPT_URL, $url);
