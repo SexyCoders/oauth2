@@ -84,7 +84,7 @@ $app->post('/token',function(Request $request, Response $response){
 
     $user_redis = new Redis();
     $user_redis->connect('10.0.0.250', 6379);
-    $user_redis->set($resp->access_token,$data->client_id);
+    $user_redis->set($resp->access_token,$data['client_id']);
 
     $to_return= new stdClass;
     $to_return->access_token=$resp->access_token;
