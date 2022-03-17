@@ -142,7 +142,7 @@ fclose($handle);
 
     $stmt = $pdo->prepare("select * from users where username=?");
     $stmt->execute([$user]);
-    $user_data=$stmt->fetch();
+    $user_data=$stmt->fetchAll();
     $response->getBody()->write(base64_encode(json_encode($user_data)));
 
 });
