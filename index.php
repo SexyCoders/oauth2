@@ -55,30 +55,27 @@ $app->post('/token',function(Request $request, Response $response){
     $log_redis->set("token_callback_ip",$ip);
     $log_redis->set("token_callback_url",$url);
 
+    $data = $request->getBody();
+    $log_redis->set("token_callback_forwarded_data",json_encode($data));
+
+    $headers = array(
+    "Accept: application/json",
+    "Content-Type: application/json",
+    );
+    $log_redis->set("token_callback_headers",json_encode($headers));
 
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
+    $resp = curl_exec($curl);
+    $log_redis->set("token_callback_response",json_encode($resp));
 
-
-$headers = array(
-   "Accept: application/json",
-   "Content-Type: application/json",
-);
-
-curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-
-$data = $request->getBody();
-    $log_redis->set("token_callback_forwarded_data",json_encode($data));
-
-curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-
-$resp = curl_exec($curl);
-
-curl_close($curl);
+    curl_close($curl);
 
     $redis = new Redis();
     $redis->connect('10.0.0.250', 6379);
