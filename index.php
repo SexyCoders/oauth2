@@ -100,20 +100,9 @@ $app->post('/token_callback',function(Request $request, Response $response){
     $log_redis = new Redis();
     $log_redis->connect('10.0.0.252', 6379);
     $log_redis->set("token_callback_inner_check","YES");
-    // @ generate a fresh token
-    // @ Token is valid till 1 hr or 3600 seconds after which it expires
-    // @ Token will not be auto refreshed
-    // @ generation of a new token should be handled at application level by calling this api
-
-    // @ add parameter : ,['access_lifetime'=>3600] if you want to extent token life time from default 3600 seconds
-
     $server = new OAuth2\Server($this->oauth);
     $server->addGrantType(new OAuth2\GrantType\ClientCredentials($this->oauth));
     $server->addGrantType(new OAuth2\GrantType\AuthorizationCode($this->oauth));
-
-    // @ generate a Oauth 2.0 token in json with format below
-    // @ {"access_token":"ac7aeb0ee432bf9b73f78985c66a1ad878593530","expires_in":3600,"token_type":"Bearer","scope":null}
-    //$t=$server->handleTokenRequest(OAuth2\Request::createFromGlobals());
     $server->handleTokenRequest(OAuth2\Request::createFromGlobals())->send();
     $log_redis->set("token_callback_inner_check","END");
 
@@ -130,5 +119,32 @@ $app->post('/validate',function(Request $request, Response $response){
 
 });
 
+
+$app->post('/user',function(Request $request, Response $response){
+    $data=$request->getParsedBody();
+     
+    $user_redis = new Redis();
+    $user_redis->connect('10.0.0.250', 6379);
+    $user=$user_redis->get($data['token']);
+
+    $filename='/etc/uniclient/passwd';
+    $handle = fopen($filename, "r");
+    $passwd = fscanf($handle,"%s");
+    fclose($handle);
+
+    $pdo = new \pdo(
+        "mysql:host=10.0.0.33; dbname=master; charset=utf8mb4; port=3306",'uniclient',$passwd[0] ,
+    [
+        \pdo::ATTR_ERRMODE            => \pdo::ERRMODE_EXCEPTION,
+        \pdo::ATTR_DEFAULT_FETCH_MODE => \pdo::FETCH_ASSOC,
+        \pdo::ATTR_EMULATE_PREPARES   => false,
+    ]); 
+
+    $stmt = $pdo->prepare("select * from users where username=?");
+    $stmt->execute([$user]);
+    $user_data=$stmt->fetch();
+    $response->getBody()->write(base64_encode(json_encode($user_data)));
+
+});
 
 $app->run();
