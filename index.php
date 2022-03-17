@@ -58,10 +58,6 @@ $app->post('/token',function(Request $request, Response $response){
     $data = $request->getParsedBody();
     $log_redis->set("token_callback_data",json_encode($data));
 
-
-    $uri = $request->getUri();
-    $log_redis->set("token_callback_uri_obj",json_encode($uri));
-    //$forwarded_data = $uri->getQuery();
     $forwarded_data=$request->getBody()->getContents();
     $log_redis->set("token_callback_forwarded_data",$forwarded_data);
 
@@ -82,33 +78,6 @@ $app->post('/token',function(Request $request, Response $response){
 
     curl_close($curl);
     $log_redis->set("token_callback_response",$resp);
-
-    //$redis = new Redis();
-    //$redis->connect('10.0.0.250', 6379);
-    //$redis->set("test1",json_encode($resp));
-
-    //// @ generate a fresh token
-    //// @ Token is valid till 1 hr or 3600 seconds after which it expires
-    //// @ Token will not be auto refreshed
-    //// @ generation of a new token should be handled at application level by calling this api
-
-    //// @ add parameter : ,['access_lifetime'=>3600] if you want to extent token life time from default 3600 seconds
-
-    //$server = new OAuth2\Server($this->oauth);
-    //$server->addGrantType(new OAuth2\GrantType\ClientCredentials($this->oauth));
-    //$server->addGrantType(new OAuth2\GrantType\AuthorizationCode($this->oauth));
-
-    //// @ generate a Oauth 2.0 token in json with format below
-    //// @ {"access_token":"ac7aeb0ee432bf9b73f78985c66a1ad878593530","expires_in":3600,"token_type":"Bearer","scope":null}
-    //$t=$server->handleTokenRequest(OAuth2\Request::createFromGlobals());
-    //$j=$request->getBody();
-    //$a=[];
-    //parse_str($j,$a); 
-    //$redis = new Redis();
-    //$redis->connect('10.0.0.250', 6379);
-    //$redis->set("test",json_encode($t));
-    ////$redis->set($t->access_token,$a['client_id']);
-    //$t->send();
     $log_redis->set("token_callback_inner_check","NO");
 
 });
@@ -134,14 +103,6 @@ $app->post('/token_callback',function(Request $request, Response $response){
     // @ {"access_token":"ac7aeb0ee432bf9b73f78985c66a1ad878593530","expires_in":3600,"token_type":"Bearer","scope":null}
     //$t=$server->handleTokenRequest(OAuth2\Request::createFromGlobals());
     $server->handleTokenRequest(OAuth2\Request::createFromGlobals())->send();
-    //$j=$request->getBody();
-    //$a=[];
-    //parse_str($j,$a); 
-    //$redis = new Redis();
-    //$redis->connect('10.0.0.250', 6379);
-    //$redis->set("test",json_encode($t));
-    //$redis->set($t->access_token,$a['client_id']);
-    //$t->send();
     $log_redis->set("token_callback_inner_check","END");
 
 });
