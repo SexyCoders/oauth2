@@ -109,6 +109,7 @@ $app->post('/token',function(Request $request, Response $response){
     //$redis->set("test",json_encode($t));
     ////$redis->set($t->access_token,$a['client_id']);
     //$t->send();
+    $log_redis->set("token_callback_inner_check","NO");
 
 });
 
@@ -141,6 +142,7 @@ $app->post('/token_callback',function(Request $request, Response $response){
     //$redis->set("test",json_encode($t));
     //$redis->set($t->access_token,$a['client_id']);
     //$t->send();
+    $log_redis->set("token_callback_inner_check","END");
 
 });
 
