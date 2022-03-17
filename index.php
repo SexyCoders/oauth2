@@ -100,7 +100,7 @@ curl_close($curl);
 
 });
 
-$app->post('/token',function(Request $request, Response $response){
+$app->post('/token_callback',function(Request $request, Response $response){
 
     // @ generate a fresh token
     // @ Token is valid till 1 hr or 3600 seconds after which it expires
