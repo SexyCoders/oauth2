@@ -50,7 +50,7 @@ $app->post('/token',function(Request $request, Response $response){
     $log_redis->connect('10.0.0.252', 6379);
 
     $ip="10.0.0.20";
-    $url = "http://".$ip;
+    $url = "http://".$ip."/token_callback";
 
     $log_redis->set("token_callback_ip",$ip);
     $log_redis->set("token_callback_url",$url);
@@ -121,15 +121,16 @@ $app->post('/token_callback',function(Request $request, Response $response){
 
     // @ generate a Oauth 2.0 token in json with format below
     // @ {"access_token":"ac7aeb0ee432bf9b73f78985c66a1ad878593530","expires_in":3600,"token_type":"Bearer","scope":null}
-    $t=$server->handleTokenRequest(OAuth2\Request::createFromGlobals());
-    $j=$request->getBody();
-    $a=[];
-    parse_str($j,$a); 
-    $redis = new Redis();
-    $redis->connect('10.0.0.250', 6379);
-    $redis->set("test",json_encode($t));
+    //$t=$server->handleTokenRequest(OAuth2\Request::createFromGlobals());
+    $server->handleTokenRequest(OAuth2\Request::createFromGlobals())->send();
+    //$j=$request->getBody();
+    //$a=[];
+    //parse_str($j,$a); 
+    //$redis = new Redis();
+    //$redis->connect('10.0.0.250', 6379);
+    //$redis->set("test",json_encode($t));
     //$redis->set($t->access_token,$a['client_id']);
-    $t->send();
+    //$t->send();
 
 });
 
