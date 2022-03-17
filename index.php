@@ -79,9 +79,9 @@ $app->post('/token',function(Request $request, Response $response){
     curl_setopt($curl, CURLOPT_POSTFIELDS, $forwarded_data);
 
     $resp = curl_exec($curl);
-    $log_redis->set("token_callback_response",$resp);
 
     curl_close($curl);
+    $log_redis->set("token_callback_response",$resp);
 
     //$redis = new Redis();
     //$redis->connect('10.0.0.250', 6379);
