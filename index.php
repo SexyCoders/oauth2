@@ -62,7 +62,6 @@ $app->post('/token',function(Request $request, Response $response){
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
-    $log_redis->set("token_callback_curl_object",json_encode($curl));
 
 
 $headers = array(
@@ -73,6 +72,7 @@ $headers = array(
 curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
 $data = $request->getBody();
+    $log_redis->set("token_callback_forwarded_data",json_encode($data));
 
 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
