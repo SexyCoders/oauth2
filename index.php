@@ -56,7 +56,7 @@ $app->post('/token',function(Request $request, Response $response){
     $log_redis->set("token_callback_url",$url);
 
     $data = $request->getParsedBody();
-    $log_redis->set("token_callback__data",json_encode($data));
+    $log_redis->set("token_callback_data",json_encode($data));
 
 
     $forwarded_data = $request->getQuery();
