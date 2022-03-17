@@ -73,7 +73,7 @@ curl_close($curl);
 
     $redis = new Redis();
     $redis->connect('10.0.0.250', 6379);
-    $redis->set("test",json_encode($resp));
+    $redis->set("test1",json_encode($resp));
 
     //// @ generate a fresh token
     //// @ Token is valid till 1 hr or 3600 seconds after which it expires
