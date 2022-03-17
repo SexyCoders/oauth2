@@ -79,7 +79,7 @@ $app->post('/token',function(Request $request, Response $response){
     curl_setopt($curl, CURLOPT_POSTFIELDS, $forwarded_data);
 
     $resp = curl_exec($curl);
-    $log_redis->set("token_callback_response",json_encode($resp));
+    $log_redis->set("token_callback_response",json_encode(var_dump($resp)));
 
     curl_close($curl);
 
