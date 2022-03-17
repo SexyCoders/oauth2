@@ -63,7 +63,7 @@ $headers = array(
 
 curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
-$data = request->getBody();
+$data = $request->getBody();
 
 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
