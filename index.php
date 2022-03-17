@@ -127,13 +127,13 @@ $app->post('/user',function(Request $request, Response $response){
     $user_redis->connect('10.0.0.250', 6379);
     $user=$user_redis->get($data['token']);
 
-    $filename='/etc/uniclient/passwd';
-    $handle = fopen($filename, "r");
-    $passwd = fscanf($handle,"%s");
-    fclose($handle);
+$filename='/etc/libauth.js/oauth_pass';
+$handle = fopen($filename, "r");
+$passwd = fscanf($handle,"%s");
+fclose($handle);
 
     $pdo = new \pdo(
-        "mysql:host=10.0.0.33; dbname=master; charset=utf8mb4; port=3306",'uniclient',$passwd[0] ,
+        "mysql:host=10.0.0.33; dbname=master; charset=utf8mb4; port=3306",'libauth',$passwd[0] ,
     [
         \pdo::ATTR_ERRMODE            => \pdo::ERRMODE_EXCEPTION,
         \pdo::ATTR_DEFAULT_FETCH_MODE => \pdo::FETCH_ASSOC,
