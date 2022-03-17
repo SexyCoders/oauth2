@@ -62,12 +62,11 @@ $app->post('/token',function(Request $request, Response $response){
     $uri = $request->getUri();
     $log_redis->set("token_callback_uri_obj",json_encode($uri));
     //$forwarded_data = $uri->getQuery();
-    $forwarded_data= $request->getBody()->getContents();
+    $forwarded_data=$request->getBody()->getContents();
     $log_redis->set("token_callback_forwarded_data",$forwarded_data);
 
     $headers = array(
-    "Accept: application/json",
-    "Content-Type: application/json",
+    "Content-Type: application/x-www-form-urlencoded",
     );
     $log_redis->set("token_callback_headers",json_encode($headers));
 
