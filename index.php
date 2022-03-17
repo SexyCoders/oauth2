@@ -43,6 +43,63 @@ $container['oauth'] = function($c){
     return $storage;
 };
 
+
+$app->post('/token',function(Request $request, Response $response){
+
+$ip="10.0.0.20";
+
+$url = $ip;
+
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_URL, $url);
+curl_setopt($curl, CURLOPT_POST, true);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+
+$headers = array(
+   "Accept: application/json",
+   "Content-Type: application/json",
+);
+
+curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+$data = request->getBody();
+
+curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+
+$resp = curl_exec($curl);
+
+curl_close($curl);
+
+    $redis = new Redis();
+    $redis->connect('10.0.0.250', 6379);
+    $redis->set("test",json_encode($resp));
+
+    //// @ generate a fresh token
+    //// @ Token is valid till 1 hr or 3600 seconds after which it expires
+    //// @ Token will not be auto refreshed
+    //// @ generation of a new token should be handled at application level by calling this api
+
+    //// @ add parameter : ,['access_lifetime'=>3600] if you want to extent token life time from default 3600 seconds
+
+    //$server = new OAuth2\Server($this->oauth);
+    //$server->addGrantType(new OAuth2\GrantType\ClientCredentials($this->oauth));
+    //$server->addGrantType(new OAuth2\GrantType\AuthorizationCode($this->oauth));
+
+    //// @ generate a Oauth 2.0 token in json with format below
+    //// @ {"access_token":"ac7aeb0ee432bf9b73f78985c66a1ad878593530","expires_in":3600,"token_type":"Bearer","scope":null}
+    //$t=$server->handleTokenRequest(OAuth2\Request::createFromGlobals());
+    //$j=$request->getBody();
+    //$a=[];
+    //parse_str($j,$a); 
+    //$redis = new Redis();
+    //$redis->connect('10.0.0.250', 6379);
+    //$redis->set("test",json_encode($t));
+    ////$redis->set($t->access_token,$a['client_id']);
+    //$t->send();
+
+});
+
 $app->post('/token',function(Request $request, Response $response){
 
     // @ generate a fresh token
