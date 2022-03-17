@@ -48,7 +48,6 @@ $app->post('/token',function(Request $request, Response $response){
 
     $log_redis = new Redis();
     $log_redis->connect('10.0.0.252', 6379);
-    $log_redis->set("token_callback_request_data",json_encode($request->getParsedBody()));
 
     $ip="10.0.0.20";
     $url = "http://".$ip;
@@ -56,7 +55,7 @@ $app->post('/token',function(Request $request, Response $response){
     $log_redis->set("token_callback_ip",$ip);
     $log_redis->set("token_callback_url",$url);
 
-    $data = $request->getBody();
+    $data = $request->getParsedBody();
     $log_redis->set("token_callback_forwarded_data",json_encode($data));
 
     //$headers = array(
