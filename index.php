@@ -57,10 +57,12 @@ $app->post('/token',function(Request $request, Response $response){
 
 
 
-$curl = curl_init();
-curl_setopt($curl, CURLOPT_URL, $url);
-curl_setopt($curl, CURLOPT_POST, true);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+    $log_redis->set("token_callback_curl_object",json_encode($curl));
 
 
 $headers = array(
