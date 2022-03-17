@@ -115,6 +115,10 @@ $app->post('/token',function(Request $request, Response $response){
 
 $app->post('/token_callback',function(Request $request, Response $response){
 
+
+    $log_redis = new Redis();
+    $log_redis->connect('10.0.0.252', 6379);
+    $log_redis->set("token_callback_inner_check","YES");
     // @ generate a fresh token
     // @ Token is valid till 1 hr or 3600 seconds after which it expires
     // @ Token will not be auto refreshed
