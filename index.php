@@ -19,7 +19,7 @@ fclose($handle);
 
 // configuration for Oauth2 DB
 $config['displayErrorDetails'] = true;
-$config['odb']['host'] = "10.0.0.33";
+$config['odb']['host'] = "uniclient_system-data";
 $config['odb']['user'] = $username;
 $config['odb']['pass'] = $passwd[0];
 $config['odb']['dbname'] = "oauth2";
@@ -46,10 +46,10 @@ $container['oauth'] = function($c){
 
 $app->post('/token',function(Request $request, Response $response){
 
-    $ip="10.0.0.2";
+    $ip="uniclient_auth";
 
     $log_redis = new Redis();
-    $log_redis->connect('10.0.0.252', 6379);
+    $log_redis->connect('uniclient_debug', 6379);
 
     $url = "http://".$ip."/token_callback";
 
@@ -84,7 +84,7 @@ $app->post('/token',function(Request $request, Response $response){
     $resp=json_decode($resp);
 
     $user_redis = new Redis();
-    $user_redis->connect('10.0.0.250', 6379);
+    $user_redis->connect('uniclient_user-token-store', 6379);
     $user_redis->set($resp->access_token,$data['client_id']);
 
     $to_return= new stdClass;
@@ -98,7 +98,7 @@ $app->post('/token_callback',function(Request $request, Response $response){
 
 
     $log_redis = new Redis();
-    $log_redis->connect('10.0.0.252', 6379);
+    $log_redis->connect('uniclient_debug', 6379);
     $log_redis->set("token_callback_inner_check","YES");
     $server = new OAuth2\Server($this->oauth);
     $server->addGrantType(new OAuth2\GrantType\ClientCredentials($this->oauth));
@@ -124,7 +124,7 @@ $app->post('/user',function(Request $request, Response $response){
     $data=$request->getParsedBody();
      
     $user_redis = new Redis();
-    $user_redis->connect('10.0.0.250', 6379);
+    $user_redis->connect('uniclient_user-token-store', 6379);
     $user=$user_redis->get($data['token']);
 
     $filename='/etc/libauth.js/oauth_pass';
@@ -133,7 +133,7 @@ $app->post('/user',function(Request $request, Response $response){
     fclose($handle);
 
     $pdo = new \pdo(
-        "mysql:host=10.0.0.33; dbname=master; charset=utf8mb4; port=3306",'libauth',$passwd[0] ,
+        "mysql:host=uniclient_system-data; dbname=master; charset=utf8mb4; port=3306",'libauth',$passwd[0] ,
     [
         \pdo::ATTR_ERRMODE            => \pdo::ERRMODE_EXCEPTION,
         \pdo::ATTR_DEFAULT_FETCH_MODE => \pdo::FETCH_ASSOC,
