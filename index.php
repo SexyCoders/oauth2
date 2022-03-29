@@ -29,6 +29,7 @@ $app->add(new \Eko3alpha\Slim\Middleware\CorsMiddleware([
     'https://oauth2.sexycoders.org' => ['POST','GET'],
     'https://data.sexycoders.org' => ['POST','GET'],
     'https://uniclient.sexycoders.org' => ['POST','GET'],
+    'https://app.uniclient.org' => ['POST','GET'],
   ]));
 
 $container = $app->getContainer();
