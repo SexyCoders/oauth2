@@ -26,7 +26,7 @@ $config['odb']['dbname'] = "oauth2";
 
 $app = new Slim\App(["settings" => $config]);
 $app->add(new \Eko3alpha\Slim\Middleware\CorsMiddleware([
-    '*' => ['POST','GET'],
+    '*' => 'POST'
   ]));
 
 $container = $app->getContainer();
