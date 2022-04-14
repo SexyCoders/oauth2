@@ -5,5 +5,5 @@ Just fork and edit the index.php file changing the urls and parameters.
 
 We run this implementation using docker but it should be easilly portable to any other system!
 
-Have fun coding
+Have fun coding  
 Shane from Greece
