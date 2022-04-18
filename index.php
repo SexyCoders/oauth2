@@ -119,7 +119,28 @@ $app->post('/validate',function(Request $request, Response $response){
 
 
 $app->post('/user',function(Request $request, Response $response){
+    $ip="uniclient_auth";
+    $url = "http://".$ip."/token_callback";
+    $headers = array(
+    "Content-Type: application/x-www-form-urlencoded",
+    );
     $data=$request->getParsedBody();
+    $forwarded_data=new stdClass;
+    $forwarded_data->token=$data->token;
+    $forwarded_data=json_encode($forwarded_data);
+
+    $url="https://oauth2.sexycoders.org/validate";
+
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $forwarded_data);
+
+    $resp = curl_exec($curl);
+
+    curl_close($curl);
      
     $user_redis = new Redis();
     $user_redis->connect('uniclient_user-token-store', 6379);
