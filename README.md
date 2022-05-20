@@ -8,12 +8,12 @@ Unfortunately since our needs forced us to take a different path, we have to dro
 
 It was a very happy journey with lots of code generated for future projects, like the c++/js crypto library.
 
-We thank with all our hearts, all contributors and wish them well!
+We thank all contributors and wish them well!
 
-Final goodbye,
+Final goodbye,  
 Shane from Greece
 
-----------------------------------------
+==============================================================
 OAuth2 implementation using PHP-Slim Mariadb and Redis.
 
 Just fork and edit the index.php file changing the urls and parameters.
@@ -22,4 +22,4 @@ We run this implementation using docker but it should be easilly portable to any
 
 Have fun coding  
 Shane from Greece
-----------------------------------------
+==============================================================
