@@ -6,7 +6,7 @@ Unfortunately since our needs forced us to take a different path, we have to dro
 
 <b>This repository is therefore no longer maintained since we have migrated to a keycloak solution!</b>
 
-It was a very happy journey with lots of code generated for future projects, like the c++/js crypto library (under the libauth.js repo).
+It was a very happy journey with lots of code generated for future projects, like the c++/js crypto library (under the libauth.js repository).
 
 We thank all contributors and wish them well!
 
